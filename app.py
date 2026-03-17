@@ -363,8 +363,11 @@ def build_pdf(sujet: dict, prefs: dict) -> io.BytesIO:
     def donnees_box(items):
         rows = []
         for item in items:
-            rows.append([Paragraph('•', ST['data']), Paragraph(item, ST['data'])])
-        t = Table(rows, colWidths=[0.4*cm, 16.6*cm])
+            texte = str(item)[:300]
+            rows.append([Paragraph('•', ST['data']), Paragraph(texte, ST['data'])])
+        if not rows:
+            return Spacer(1, 0.1*cm)
+        t = Table(rows, colWidths=[0.4*cm, 15*cm], repeatRows=0)
         t.setStyle(TableStyle([
             ('BACKGROUND',(0,0),(-1,-1), HexColor('#f5f5f5')),
             ('BOX',(0,0),(-1,-1), 0.5, ACCENT),
@@ -374,7 +377,6 @@ def build_pdf(sujet: dict, prefs: dict) -> io.BytesIO:
             ('LEFTPADDING',(1,0),(1,0), 4),
         ]))
         return t
-
     # ── PAGE DE GARDE ──
     h1 = Table([[Paragraph('BACCALAURÉAT GÉNÉRAL', ST['title']),
                  Paragraph('ÉPREUVE DE PHYSIQUE-CHIMIE', ST['title'])]],
