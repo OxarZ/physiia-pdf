@@ -361,17 +361,20 @@ def build_pdf(sujet: dict, prefs: dict) -> io.BytesIO:
         return Paragraph(f'<b>{num}.</b>  {text}{suffix}', ST['q'])
 
     def donnees_box(items):
-        rows = [[Paragraph('•', ST['data']), Paragraph(item, ST['data'])] for item in items]
-        t = Table(rows, colWidths=[0.4*cm, 16.6*cm])
-        t.setStyle(TableStyle([
-            ('BACKGROUND',(0,0),(-1,-1), HexColor('#f5f5f5')),
-            ('BOX',(0,0),(-1,-1), 0.5, ACCENT),
-            ('TOPPADDING',(0,0),(-1,-1), 2),
-            ('BOTTOMPADDING',(0,0),(-1,-1), 2),
-            ('LEFTPADDING',(0,0),(0,0), 8),
-            ('LEFTPADDING',(1,0),(1,0), 4),
-        ]))
-        return t
+    rows = []
+    for item in items:
+        rows.append([Paragraph('•', ST['data']), Paragraph(item, ST['data'])])
+    t = Table(rows, colWidths=[0.4*cm, 16.6*cm])
+    t.setStyle(TableStyle([
+        ('BACKGROUND',(0,0),(-1,-1), HexColor('#f5f5f5')),
+        ('BOX',(0,0),(-1,-1), 0.5, ACCENT),
+        ('TOPPADDING',(0,0),(-1,-1), 3),
+        ('BOTTOMPADDING',(0,0),(-1,-1), 3),
+        ('LEFTPADDING',(0,0),(0,0), 8),
+        ('LEFTPADDING',(1,0),(1,0), 4),
+        ('WORDWRAP',(0,0),(-1,-1), True),
+    ]))
+    return t
 
     # ── PAGE DE GARDE ──
     h1 = Table([[Paragraph('BACCALAURÉAT GÉNÉRAL', ST['title']),
