@@ -449,11 +449,11 @@ def build_pdf(sujet: dict, prefs: dict) -> io.BytesIO:
     for p in parties:
         recap_data.append([
             Paragraph(f"Partie {p.get('numero','')}", ST['data']),
-            Paragraph(p.get('titre',''), ST['data']),
-            Paragraph(p.get('notions',''), ST['data']),
+            Paragraph(str(p.get('titre',''))[:80], ST['data']),
+            Paragraph(str(p.get('notions',''))[:80], ST['data']),
             Paragraph(f"{p.get('points','')} pts", ST['data']),
         ])
-    tr = Table(recap_data, colWidths=[3*cm, 6*cm, 5.5*cm, 2.5*cm])
+    tr = Table(recap_data, colWidths=[3*cm, 5.5*cm, 5.5*cm, 2*cm])
     tr.setStyle(TableStyle([
         ('BACKGROUND',(0,0),(-1,0), ACCENT),
         ('TEXTCOLOR',(0,0),(-1,0), HexColor('#ffffff')),
