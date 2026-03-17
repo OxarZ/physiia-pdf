@@ -407,7 +407,7 @@ def build_pdf(sujet, prefs):
         rows = []
         for item in items:
             txt = safe_str(item, 250)
-            rows.append([Paragraph('•', ST['data']),
+            rows.append([Paragraph('-', ST['data']),
                          Paragraph(txt, ST['data'])])
         t = Table(rows, colWidths=[0.4 * cm, 14.6 * cm],
                   style=TableStyle([
