@@ -360,7 +360,7 @@ def build_pdf(sujet: dict, prefs: dict) -> io.BytesIO:
         suffix = f'  <i>({pts} pt{"s" if pts and pts>1 else ""})</i>' if pts else ''
         return Paragraph(f'<b>{num}.</b>  {text}{suffix}', ST['q'])
 
-  def donnees_box(items):
+    def donnees_box(items):
         rows = []
         for item in items:
             rows.append([Paragraph('•', ST['data']), Paragraph(item, ST['data'])])
